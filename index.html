@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EGS Full Stack</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <figure class="logo">
+          <img src="images/logo.svg" alt="Logo" />
+        </figure>
+        <nav>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero" id="inicio">
+        <h2>Hola, soy</h2>
+        <h1>Elia Galiana Sanabria</h1>
+        <figure>
+          <img src="images/eliga.jpg" alt="Foto Elia Galiana Sanabria" />
+        </figure>
+        <p class="fondo">📖 Bootcamp Full Stack Developer (Upgrade-Hub)</p>
+        <p class="fondo">
+          Transformo ideas en productos digitales funcionales. Especialista en
+          unir la potencia del desarrollo Fullstack con la sensibilidad del
+          diseño visual.
+        </p>
+
+        <div class="desc">
+          <div class="correo">
+            <i class="fa-regular fa-envelope"></i>
+            <p>eliagaliana@gmail.com</p>
+          </div>
+          <div class="btns">
+            <button class="git">
+              <a href="https://github.com/eliagaliana" target="_blank"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+            </button>
+            <button class="in">
+              <a
+                href="https://www.linkedin.com/in/elia-galiana-sanabria-74992431a/"
+                target="_blank"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+            </button>
+          </div>
+        </div>
+        <a href="contact.html" class="worktogether">
+          <span>Trabajemos juntos</span>
+        </a>
+      </section>
+      <section class="proyectos" id="proyectos">
+        <h3>Proyectos</h3>
+        <div class="eleccionpro">
+          <div class="btn-filtro selec" data-filter="all">
+            <p>Todo</p>
+          </div>
+          <div class="btn-filtro selecsin" data-filter="fullstack">
+            <p>Full Stack Developer</p>
+          </div>
+          <div class="btn-filtro selecsin" data-filter="uxui">
+            <p>Diseño UX/UI</p>
+          </div>
+          <!-- <div class="block">
+            <i class="fa-solid fa-lock"></i>
+            <p>Próximamente</p>
+          </div> -->
+        </div>
+        <div class="contArt">
+          <article class="artProyecto" data-category="fullstack">
+            <!-- <a
+              href="./proyectos/hamburgueseria_rovers/rovers.html"
+              target="_blank"
+            > -->
+              <figure>
+                <img
+                  src="./images/hamburgueseria_rovers.png"
+                  alt="Foto del proyecto de Hamburguesería 'Rovers'"
+                />
+              </figure>
+              <div class="infdescr">
+                <p class="titulo">Hamburguesería 'Rovers'</p>
+                <p class="descripcion">
+                  Este proyecto consiste en la maquetación responsive de la
+                  página principal de la Hamburguesería Rovers, desarrollada
+                  como práctica del bootcamp de desarrollo web. El objetivo
+                  principal fue diseñar una interfaz moderna, atractiva y
+                  completamente adaptable a distintos dispositivos, priorizando
+                  la experiencia visual y la coherencia estética de la marca.
+                </p>
+                <button class="hab">HTML</button>
+                <button class="hab">CSS</button>
+              </div>
+            </a>
+          </article>
+          <!-- <article class="artProyecto" data-category="fullstack">
+            <a href="./proyectos/yamifood/yamifood.html" target="_blank">
+              <figure>
+                <img
+                  src="./images/yamifood2.png"
+                  alt="Foto del proyecto de YamiFood Restaurant"
+                />
+              </figure>
+              <div class="infdescr">
+                <p class="titulo">YAMIFOOD Restaurant</p>
+                <p class="descripcion">
+                  Experiencia Web Gastronómica Maquetación de interfaz para un
+                  restaurante moderno, donde la prioridad fue el impacto visual
+                  y la adaptabilidad. Se construyó una estructura semántica y
+                  flexible que respeta la estética de la marca, garantizando que
+                  el diseño "apetecible" se mantenga intacto sin importar el
+                  tamaño de la pantalla.
+                </p>
+                <button class="hab">HTML</button>
+                <button class="hab">CSS</button>
+              </div>
+            </a>
+          </article> -->
+          <article class="artProyecto" data-category="fullstack">
+            <!-- <a href="./proyectos/clon_yt/yt.html" target="_blank"> -->
+              <figure>
+                <img
+                  src="./images/clon_yt.png"
+                  alt="Foto del proyecto de clon de YT"
+                />
+              </figure>
+              <div class="infdescr">
+                <p class="titulo">Clon de YouTube</p>
+                <p class="descripcion">
+                  Réplica responsive de la interfaz de reproducción y
+                  descubrimiento de video. Este proyecto recrea la experiencia
+                  de usuario (UX) de YouTube, enfocándose en un diseño fluido
+                  que se adapta desde móviles hasta pantallas de escritorio.
+                </p>
+                <button class="hab">HTML</button>
+                <button class="hab">CSS</button>
+                <button class="hab">JavaScript</button>
+              </div>
+            </a>
+          </article>
+          <article class="artProyecto" data-category="fullstack">
+            <!-- <a href="./proyectos/tienda_apple/tiendapple.html" target="_blank"> -->
+              <figure>
+                <img
+                  src="./images/pApple.png"
+                  alt="Foto del proyecto de Tienda de productos apple"
+                />
+              </figure>
+              <div class="infdescr">
+                <p class="titulo">Tienda de Productos de Apple</p>
+                <p class="descripcion">
+                  Interfaz de tienda online para productos tecnológicos con
+                  gestión de favoritos. Un desarrollo web de diseño fijo
+                  (versión escritorio) que permite a los usuarios explorar y
+                  organizar productos de Apple. La aplicación destaca por la
+                  fluidez en la búsqueda de productos sin necesidad de recargar
+                  la página.
+                </p>
+                <button class="hab">HTML</button>
+                <button class="hab">CSS</button>
+                <button class="hab">JavaScript</button>
+              </div>
+            </a>
+          </article>
+          <article class="artProyecto" data-category="fullstack">
+            <!-- <a href="./proyectos/clon_facebook/facebook.html" target="_blank"> -->
+              <figure>
+                <img
+                  src="./images/facebook.png"
+                  alt="Foto del proyecto de clon de Facebook"
+                />
+              </figure>
+              <div class="infdescr">
+                <p class="titulo">Clon de Facebook</p>
+                <p class="descripcion">
+                  Simulación de la interfaz del "News Feed" con diseño
+                  adaptativo. Desarrollo de la estructura clásica de una red
+                  social, priorizando la gestión de componentes visuales
+                  complejos como las "Stories" y las tarjetas de publicaciones.
+                </p>
+                <button class="hab">HTML</button>
+                <button class="hab">CSS</button>
+                <button class="hab">JavaScript</button>
+              </div>
+            </a>
+          </article>
+
+          <article class="artProyecto" data-category="fullstack">
+            <figure>
+              <img
+                src="./images/apie_commerce.png"
+                alt="Foto del proyecto de clon de Facebook"
+              />
+            </figure>
+            <div class="infdescr">
+              <p class="titulo">API RESTful para gestión de E-commerce</p>
+              <p class="descripcion">
+                Diseño y desarrollo de una arquitectura Backend completa para la
+                administración de usuarios y productos. El proyecto se centró en
+                el modelado eficiente de una base de datos relacional y la
+                construcción de endpoints escalables. Implementé operaciones
+                CRUD (Crear, Leer, Actualizar, Borrar) y lógica de filtrado
+                compleja mediante consultas SQL optimizadas, asegurando la
+                integridad de los datos entre las tablas relacionadas.
+              </p>
+              <button class="hab">MySQL</button>
+              <button class="hab">SQL</button>
+              <button class="hab">FastAPI</button>
+            </div>
+          </article>
+
+          <article class="artProyecto" data-category="uxui">
+            <figure>
+              <img
+                src="./images/portfoliofigma.png"
+                alt="Foto del proyecto de diseño"
+              />
+            </figure>
+            <div class="infdescr">
+              <p class="titulo">Porfolio web/mobile</p>
+              <p class="descripcion">
+                Desarrollo de una interfaz escalable y modular utilizando las
+                características avanzadas de Figma. El proyecto se centró en la
+                creación de un Design System atómico para garantizar la
+                consistencia visual en todas las pantallas.
+              </p>
+              <button class="hab">Figma</button>
+            </div>
+          </article>
+
+          <article class="artProyecto" data-category="uxui">
+            <figure>
+              <img
+                src="./images/mobilefigma.png"
+                alt="Foto del proyecto de diseño"
+              />
+            </figure>
+            <div class="infdescr">
+              <p class="titulo">Football Career Manager</p>
+              <p class="descripcion">
+                Exploración visual para una aplicación complementaria de
+                videojuegos deportivos. El proyecto se centró en crear una
+                interfaz moderna y dinámica, utilizando micro-interacciones
+                fluidas y elementos visuales con profundidad para dar una
+                sensación premium y tecnológica. El sistema de diseño busca un
+                equilibrio entre la inmersión visual que esperan los fans y la
+                eficiencia de navegación necesaria en una herramienta de gestión
+                móvil.
+              </p>
+              <button class="hab">Figma</button>
+            </div>
+          </article>
+          <article class="artProyecto" data-category="uxui">
+            <figure>
+              <img
+                src="./images/pisofigma.png"
+                alt="Foto del proyecto de diseño"
+              />
+            </figure>
+            <div class="infdescr">
+              <p class="titulo">Co-living App Concept</p>
+              <p class="descripcion">
+                Diseño integral de una plataforma de gestión inmobiliaria
+                colaborativa. Como se aprecia en la vista de pájaro del
+                proyecto, desarrollé un sistema de más de 50 pantallas
+                interconectadas que cubren todo el ciclo de vida del alquiler:
+                desde la búsqueda y match de compañeros hasta la gestión de
+                gastos y tareas domésticas. El reto principal fue mantener la
+                consistencia visual a través de una inmensa variedad de flujos
+                de usuario (inquilino, propietario, administrador), creando un
+                sistema de diseño atómico robusto listo para un futuro
+                desarrollo escalable.
+              </p>
+              <button class="hab">Figma</button>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="experience-section" id="experiencia">
+        <h3 class="section-title">Experiencia</h3>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <img src="./images/ilerna.png" alt="Logo Ilerna" />
+            </div>
+
+            <div class="timeline-content">
+              <h3>Profesora (Prácticas)</h3>
+              <span class="date">Marz. 2025 - Jun. 2025 (4 meses)</span>
+              <p>
+                Experiencia docente durante el periodo de prácticas del Máster
+                en Formación del Profesorado, impartiendo clases en un entorno
+                de Formación Profesional. Planificación y desarrollo de unidades
+                didácticas. Impartición de clases teóricas y prácticas.
+                Evaluación del progreso del alumnado. Colaboración con el equipo
+                docente. Desarrollo de competencias en comunicación, liderazgo,
+                empatía y gestión de grupo.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <img src="./images/torresoptico.PNG" alt="Logo Torres Óptico" />
+            </div>
+            <div class="timeline-content">
+              <h3>Óptica</h3>
+              <span class="date">Sept. 2024 - Oct. 2024 (2 meses)</span>
+              <p>
+                Gestión integral del gabinete óptico. Realización completa de
+                exámenes visuales. Atención personalizada a clientes. Control de
+                stock, pedidos y mantenimiento de equipos ópticos. Supervisión
+                de la imagen y organización del punto de venta. Desempeño de
+                funciones de manera autónoma, demostrando capacidad de decisión,
+                gestión del tiempo y resolución de incidencias.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <img src="images/pizzeriacarlos.png" alt="Logo Pizzería Carlos" />
+            </div>
+            <div class="timeline-content">
+              <h3>Repartidora de comida a domicilio</h3>
+              <span class="date">feb. 2023 - Jun. 2024 (1 año y 5 meses)</span>
+              <p>
+                Responsabilidad en la entrega puntual y segura de pedidos a
+                domicilio Gestión eficiente de rutas y tiempos de entrega,
+                manteniendo la calidad del servicio en momentos de alta demanda.
+                Manejo de efectivo y pagos digitales. Comunicación constante con
+                el equipo de cocina y coordinación con otros repartidores.
+                Desarrollo de habilidades en organización, rapidez en la toma de
+                decisiones y trabajo bajo presión.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <img src="images/alainafflelou.jpg" alt="Logo Alain Afflelou" />
+            </div>
+            <div class="timeline-content">
+              <h3>Óptica (Prácticas)</h3>
+              <span class="date">Mar. 2023 - Jun. 2023 (4 meses)</span>
+              <p>
+                Experiencia práctica en el entorno óptico. Realización de
+                exámenes visuales y pruebas optométricas bajo supervisión,
+                aplicando procedimientos estandarizados. Trabajo colaborativo
+                con otros profesionales. Apoyo en la selección, ajuste y
+                mantenimiento de monturas y lentes oftálmicas. Participación en
+                la gestión de pedidos. Desarrollo de habilidades clave como la
+                comunicación con el paciente, precisión técnica y aprendizaje
+                constante.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="habilidades" id="habilidades">
+        <h3>Habilidades</h3>
+        <div class="contHab">
+          <div class="habilidad">
+            <i class="fa-brands fa-html5"></i>
+            <p>HTML</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-brands fa-css3"></i>
+            <p>CSS</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-brands fa-python"></i>
+            <p>Python</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-brands fa-js"></i>
+            <p>JavaScript</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-brands fa-figma"></i>
+            <p>Figma</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-brands fa-git-alt"></i>
+            <p>Git</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-solid fa-database"></i>
+            <p>SQL</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-solid fa-database"></i>
+            <p>MongoDB</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-solid fa-desktop"></i>
+            <p>FastAPI</p>
+          </div>
+          <div class="habilidad">
+            <i class="fa-brands fa-angular"></i>
+            <p>Angular</p>
+          </div>
+        </div>
+      </section>
+      <section class="contacto" id="contacto">
+        <h3>Contacto</h3>
+        <div class="contCont">
+          <div class="dejatu">
+            <i class="fa-solid fa-circle-info"></i>
+            <p>
+              Deja tu mensaje y un correo, si quieres, para poder contactar
+              contigo.
+            </p>
+          </div>
+          <a href="contact.html" class="worktogether">
+            <span>Trabajemos juntos</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="foo">
+        <figure class="logo">
+          <a href="#inicio">
+            <img src="images/logo.svg" alt="Logo" />
+          </a>
+        </figure>
+        <div class="dchafooter">
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+          <div class="btns">
+            <button class="git">
+              <a href="https://github.com/eliagaliana" target="_blank"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+            </button>
+            <button class="in">
+              <a
+                href="https://www.linkedin.com/in/elia-galiana-sanabria-74992431a/"
+                target="_blank"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="fin">
+        <p>
+          &copy; 2025 <img src="./images/logo.svg" alt="Logo EGS" /> Creado con
+          pasión y código
+        </p>
+      </div>
+    </footer>
+    <script src="scripts.js"></script>
+  </body>
+</html>

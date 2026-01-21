@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EGS Contáctame</title>
+    <link rel="stylesheet" href="css/contact.css" />
+  </head>
+  <body>
+    <section class="contact-section">
+      <div class="contact-container" id="form-container">
+        <h2>¿Empezamos un proyecto juntos?</h2>
+        <p class="subtitle">Cuéntame tu idea.</p>
+
+        <form
+          id="contact-form"
+          action="https://formspree.io/f/xzddzagr"
+          method="POST"
+          class="form-box"
+        >
+          <div class="input-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name" placeholder="Tu nombre" />
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="hola@ejemplo.com"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="service">¿Qué necesitas?</label>
+            <select name="service" id="service">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="fullstack">Desarrollo Web Full Stack</option>
+              <option value="frontend">Solo Frontend</option>
+              <option value="design">Diseño UI/UX</option>
+              <option value="combo">Pack Completo</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="message">Tu mensaje</label>
+            <textarea
+              name="message"
+              id="message"
+              rows="5"
+              placeholder="Cuéntame sobre tu proyecto..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-submit">
+            Enviar Mensaje
+          </button>
+          <button class="btn-back"><a href="index.html">Volver</a></button>
+
+          <p
+            id="form-status"
+            style="display: none; margin-top: 15px; font-weight: bold"
+          ></p>
+        </form>
+      </div>
+    </section>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
