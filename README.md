@@ -7,7 +7,7 @@ Este proyecto ha sido diseñado para ser totalmente **responsive** (adaptable a 
 ## 🔗 Ver en vivo
 
 Puedes visitar el portafolio desplegado aquí:
-👉 **[https://eliagaliana.github.io](https://eliagaliana.github.io)**
+👉 **https://eliagaliana.github.io/elia-galiana.github.io/**
 
 ---
 
