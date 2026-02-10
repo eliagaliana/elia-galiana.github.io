@@ -30,3 +30,12 @@ Este portafolio fue construido utilizando tecnologías web estándar, sin depend
 * **🛠 Habilidades:** Visualización de mi stack tecnológico.
 * **mailbox_with_mail: Contacto:** Enlaces directos a mis redes sociales y correo electrónico.
 
+---
+
+## 📧 Contacto
+
+Si tienes alguna pregunta o deseas más información sobre el proyecto, no dudes en ponerte en contacto:
+
+- Autor: Elia Galiana
+- Correo: eliagaliana@gmail.com
+- LinkedIn: www.linkedin.com/in/elia-galiana-sanabria
