@@ -11,12 +11,9 @@ botones.forEach((boton) => {
       botonActivo.classList.replace("selec", "selecsin");
     }
     e.currentTarget.classList.replace("selecsin", "selec");
-
     const filtro = e.currentTarget.getAttribute("data-filter");
-
     proyectos.forEach((card) => {
       const categoriaCard = card.getAttribute("data-category");
-
       if (filtro === "all" || filtro === categoriaCard) {
         card.classList.remove("oculto");
       } else {
@@ -29,10 +26,8 @@ botones.forEach((boton) => {
 async function handleSubmit(event) {
   event.preventDefault();
   const data = new FormData(event.target);
-
   submitBtn.disabled = true;
   submitBtn.textContent = "Enviando...";
-
   fetch(event.target.action, {
     method: form.method,
     body: data,
@@ -66,4 +61,69 @@ async function handleSubmit(event) {
     });
 }
 
-form.addEventListener("submit", handleSubmit);
+if (form) {
+  form.addEventListener("submit", handleSubmit);
+}
+
+
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+if (!prefersReducedMotion) {
+  
+  const revealSelectors = [
+    ".proyectos > h3",
+    ".eleccionpro",
+    ".artProyecto",
+    ".section-title",
+    ".timeline-item",
+    ".habilidades > h3",
+    ".subtitulo-categoria",
+    ".habilidad",
+    ".contacto > h3",
+    ".contCont",
+  ];
+
+  revealSelectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((el) => {
+      el.classList.add("reveal");
+    });
+  });
+
+  
+  const staggerGroups = [".contArt", ".timeline", ".habilidades .contHab"];
+  staggerGroups.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((group) => {
+      [...group.children].forEach((child, i) => {
+        child.style.transitionDelay = `${Math.min(i, 8) * 90}ms`;
+      });
+    });
+  });
+
+  
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  document
+    .querySelectorAll(".reveal")
+    .forEach((el) => revealObserver.observe(el));
+
+  document.querySelectorAll(".hero > *").forEach((el, i) => {
+    el.classList.add("hero-in");
+    el.style.animationDelay = `${i * 120}ms`;
+  });
+} else {
+  document
+    .querySelectorAll(".artProyecto, .timeline-item, .habilidad")
+    .forEach((el) => el.classList.add("in-view"));
+}
