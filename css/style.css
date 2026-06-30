@@ -21,19 +21,25 @@ header {
   margin-bottom: 60px;
   position: fixed;
   width: 100%;
+  z-index: 10;
 
   div {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     max-width: 1100px;
-    padding: 16px 0px;
+    padding: 16px 20px;
     margin: 0 auto;
+    gap: 10px;
   }
 
   ul {
     color: white;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 4px;
     li {
       margin-left: 25px;
       font-size: 14px;
@@ -73,32 +79,41 @@ header div ul li:hover {
   padding-top: 150px;
   padding-bottom: 150px;
   max-width: 1100px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
   gap: 20px;
+  text-align: center;
 
   h1 {
-    background: linear-gradient(to right, #fecdfb, #9447b3);
+    background: linear-gradient(90deg, #fecdfb, #9447b3, #fecdfb);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 36px;
+    font-size: clamp(26px, 6vw, 36px);
     font-weight: 600;
     margin: 0 auto;
   }
 
   h2 {
-    font-size: 36px;
+    font-size: clamp(26px, 6vw, 36px);
     margin: 0 auto;
     color: white;
   }
   figure {
     img {
       border-radius: 999px;
-      width: 200px;
+      width: clamp(140px, 30vw, 200px);
       height: auto;
+      animation: pulseRing 2.8s ease-out infinite;
     }
   }
   .fondo {
     max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
     color: white;
     line-height: 1.6;
     background-color: rgba(255, 255, 255, 0.1);
@@ -111,7 +126,9 @@ header div ul li:hover {
 .desc {
   color: white;
   display: flex;
-  gap: 60px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 40px;
 
   .correo {
     display: flex;
@@ -237,7 +254,7 @@ header div ul li:hover {
 
 .contArt {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   gap: 20px;
 }
 
@@ -247,7 +264,7 @@ header div ul li:hover {
   visibility: hidden !important;
 }
 
-.artProyecto {
+.artProyecto.in-view {
   animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
@@ -275,14 +292,18 @@ header div ul li:hover {
   }
 }
 
+/* Filtro de proyectos: 6 categorías, se ajusta con flex-wrap */
 .eleccionpro {
   background-color: rgba(148, 71, 179, 0.5);
   color: white;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  width: 35%;
-  padding: 3px 3px;
+  width: auto;
+  max-width: 100%;
+  gap: 4px;
+  padding: 6px;
   margin: 0 auto 30px auto;
   border-radius: 6px;
 }
@@ -308,6 +329,10 @@ header div ul li:hover {
 
 .selecsin:hover {
   background-color: #7a3594;
+}
+
+.btn-filtro p {
+  white-space: nowrap;
 }
 
 .block {
@@ -336,7 +361,8 @@ header div ul li:hover {
     text-decoration: none;
   }
   figure {
-    width: 352px;
+    width: 100%;
+    max-width: 352px;
     height: 300px;
     overflow: hidden;
     margin: 0 auto;
@@ -355,6 +381,53 @@ header div ul li:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
   border-color: white;
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Tarjeta "En proceso" (proyecto n8n sin publicar) */
+.figura-proximamente {
+  width: 100%;
+  max-width: 352px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(148, 71, 179, 0.18),
+    rgba(148, 71, 179, 0.18) 10px,
+    rgba(148, 71, 179, 0.08) 10px,
+    rgba(148, 71, 179, 0.08) 20px
+  );
+}
+
+.figura-proximamente i {
+  font-size: clamp(40px, 8vw, 56px);
+  color: #fecdfb;
+  opacity: 0.85;
+}
+
+.badge-proximamente {
+  background-color: rgba(254, 205, 251, 0.15);
+  color: #fecdfb;
+  border: 1px solid rgba(254, 205, 251, 0.4);
+  border-radius: 16px;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.artProyecto.proximamente {
+  cursor: default;
+}
+
+.artProyecto.proximamente:hover {
+  border-color: rgba(254, 205, 251, 0.5);
 }
 
 .infdescr {
@@ -467,7 +540,9 @@ header div ul li:hover {
   padding: 15px 25px;
   border-radius: 10px;
   border-left: 4px solid #fecdfb;
-  width: 300px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
 
   opacity: 0;
   visibility: hidden;
@@ -568,13 +643,6 @@ header div ul li:hover {
   font-weight: 700;
 }
 
-.contHab {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
 .habilidad {
   background-color: #00c853;
   padding: 15px 25px;
@@ -588,10 +656,6 @@ header div ul li:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.habilidad:hover {
-  transform: translateY(-5px);
-}
-
 .habilidad i {
   font-size: 2rem;
   margin-bottom: 8px;
@@ -603,22 +667,19 @@ header div ul li:hover {
   font-weight: 500;
 }
 
-.habilidad:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-  border-color: #00c853;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
 .contHab {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 10px;
+  margin-bottom: 20px;
+  max-width: 100%;
 }
 
 .habilidad {
-  width: 190px;
+  width: 60%;
+  max-width: 190px;
   height: 139px;
+  margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -638,6 +699,13 @@ header div ul li:hover {
     font-weight: 500;
     color: #00c853;
   }
+}
+
+.habilidad:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  border-color: #00c853;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .contacto {
@@ -736,6 +804,27 @@ header div ul li:hover {
   }
 }
 
+/* ===== Tablet: 1024px ===== */
+@media (max-width: 1024px) {
+  .hero {
+    padding-top: 120px;
+    padding-bottom: 100px;
+  }
+
+  .contArt {
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  }
+
+  .eleccionpro {
+    width: 90%;
+  }
+
+  .timeline-content {
+    max-width: 260px;
+  }
+}
+
+/* ===== Timeline hover-reveal disabled on touch/tablet ===== */
 @media (max-width: 768px) {
   .timeline-content {
     opacity: 1;
@@ -750,26 +839,51 @@ header div ul li:hover {
   }
 }
 
-@media (width<700px) {
+/* ===== Mobile: 750px ===== */
+@media (max-width: 750px) {
   body {
-    max-width: 90%;
+    max-width: 92%;
     margin: 0 auto;
   }
 
   header {
-    display: none;
+    position: static;
+    margin-bottom: 0;
+  }
+
+  header div {
+    flex-direction: column;
+    padding: 14px 0;
+    gap: 8px;
+  }
+
+  header ul li {
+    margin-left: 0;
+    margin: 0 6px;
+  }
+
+  main {
+    padding-top: 20px;
   }
 
   .hero {
     padding-top: 30px;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
   }
 
   .hero h1 {
-    font-size: 34px;
+    font-size: clamp(24px, 7vw, 34px);
+  }
+
+  .desc {
+    gap: 16px 30px;
   }
 
   .artProyecto figure {
+    width: 100%;
+  }
+
+  .figura-proximamente {
     width: 100%;
   }
 
@@ -783,10 +897,11 @@ header div ul li:hover {
   }
 
   .eleccionpro {
-    width: 80%;
+    width: 100%;
   }
   .btn-filtro p {
     text-align: center;
+    font-size: 13px;
   }
 
   .experience-section {
@@ -797,13 +912,19 @@ header div ul li:hover {
     }
   }
 
+  .timeline-item {
+    align-items: flex-start;
+  }
+
   .timeline-dot {
     width: 60px;
     height: 60px;
+    flex-shrink: 0;
   }
 
   .timeline-content {
-    width: 75%;
+    width: 100%;
+    max-width: none;
   }
 
   .timeline::before {
@@ -818,14 +939,17 @@ header div ul li:hover {
     text-align: center;
   }
 
-  .habilidad {
-    width: 150px;
-    height: 100px;
+  .contHab {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
   }
 
-  .contHab {
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
+  .habilidad {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    min-height: 100px;
+    padding: 15px;
   }
 
   .contacto h3 {
@@ -834,6 +958,216 @@ header div ul li:hover {
   }
 
   .foo {
-    display: none;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .dchafooter {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .dchafooter ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
+  }
+}
+
+/* ===== Small phones: 380px ===== */
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .hero h2 {
+    font-size: 22px;
+  }
+
+  .worktogether {
+    padding: 1rem 1.6rem;
+    font-size: 0.85rem;
+  }
+
+  .contHab {
+    grid-template-columns: 1fr;
+  }
+
+  header ul li {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   ANIMACIONES: cascade reveal + micro-interacciones
+   ========================================================= */
+
+/* --- Reveal genérico al hacer scroll --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tarjetas de proyecto: parten algo más pequeñas y hacen "pop" al entrar */
+.artProyecto.reveal {
+  transform: translateY(28px) scale(0.94);
+}
+
+.artProyecto.reveal.in-view {
+  transform: none;
+  opacity: 1;
+}
+
+/* Skills: entrada en escala, como si encajaran en su sitio */
+.habilidad.reveal {
+  transform: scale(0.85);
+}
+
+.habilidad.reveal.in-view {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Timeline: alterna el lado desde el que entra cada hito */
+.timeline-item.reveal {
+  transform: translateX(-24px);
+}
+
+.timeline-item:nth-child(even).reveal {
+  transform: translateX(24px);
+}
+
+.timeline-item.reveal.in-view {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* --- Entrada del hero al cargar la página (no depende de scroll) --- */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-in {
+  opacity: 0;
+  animation: heroFadeUp 0.7s ease forwards;
+}
+
+/* --- Gradiente animado del nombre --- */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* --- Anillo de pulso en la foto de perfil --- */
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(148, 71, 179, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(148, 71, 179, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(148, 71, 179, 0);
+  }
+}
+
+/* --- Subrayado animado en la navegación --- */
+header div ul li {
+  position: relative;
+}
+
+header div ul li::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: -2px;
+  height: 2px;
+  background: #fecdfb;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+header div ul li:hover::after {
+  transform: scaleX(1);
+}
+
+/* --- Botones de filtro: pequeño rebote al activarse --- */
+.btn-filtro {
+  transition:
+    transform 0.25s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.btn-filtro.selec {
+  animation: filtroPop 0.3s ease;
+}
+
+@keyframes filtroPop {
+  0% {
+    transform: scale(0.92);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* --- Iconos de skills: pequeño giro al hover --- */
+.habilidad i {
+  transition: transform 0.35s ease;
+}
+
+.habilidad:hover i {
+  transform: scale(1.65) rotate(-6deg);
+}
+
+/* --- Scroll suave con offset por el header fijo --- */
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+/* --- Respeto a personas que prefieren menos movimiento --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
