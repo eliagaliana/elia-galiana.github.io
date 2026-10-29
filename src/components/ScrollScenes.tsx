@@ -8,19 +8,32 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const q = <T extends Element = HTMLElement>(sel: string) => gsap.utils.toArray<T>(sel);
 
+// Pantallas táctiles: el móvil tiene menos potencia y el scroll lo mueve el sistema.
+const isTouch = () => matchMedia("(hover: none) and (pointer: coarse)").matches;
+
 // Capa de movimiento ligada al scroll: cada tramo de la página mueve algo.
 // Todo es transform/opacity y se desactiva con "movimiento reducido".
 // Los elementos que anima GSAP no llevan [data-reveal] (no se pisan con el CSS).
 export function ScrollScenes() {
   useGSAP(() => {
     const mm = gsap.matchMedia();
+    const touch = isTouch();
+    // En móvil, sin retraso de suavizado: la animación va pegada al dedo y no se pone
+    // al día a saltos. En ordenador se mantiene el suavizado.
+    const S = (v: number) => (touch ? true : v);
+    if (touch) {
+      // El scroll se gestiona en el mismo hilo que las animaciones, así van sincronizados,
+      // y no se recoloca nada cuando aparece o se esconde la barra del navegador.
+      ScrollTrigger.config({ ignoreMobileResize: true });
+      ScrollTrigger.normalizeScroll(true);
+    }
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // Barra de progreso de lectura.
       gsap.to(".scroll-progress", {
         scaleX: 1,
         ease: "none",
-        scrollTrigger: { start: 0, end: "max", scrub: 0.3 },
+        scrollTrigger: { start: 0, end: "max", scrub: S(0.3) },
       });
 
       // El hero mide tres pantallas y su contenido se queda pegado (sticky, lo hace el
@@ -31,7 +44,7 @@ export function ScrollScenes() {
           trigger: ".hero",
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.6,
+          scrub: S(0.6),
         },
       });
       heroTl
@@ -48,7 +61,7 @@ export function ScrollScenes() {
         {
           rotate: -2,
           ease: "none",
-          scrollTrigger: { trigger: ".band", start: "top bottom", end: "bottom top", scrub: 0.5 },
+          scrollTrigger: { trigger: ".band", start: "top bottom", end: "bottom top", scrub: S(0.5) },
         }
       );
 
@@ -60,13 +73,13 @@ export function ScrollScenes() {
           {
             xPercent: -2,
             ease: "none",
-            scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.6 },
+            scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: S(0.6) },
           }
         );
         gsap.fromTo(
           el,
           { opacity: 0.35 },
-          { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "top 85%", scrub: 0.4 } }
+          { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "top 85%", scrub: S(0.4) } }
         );
       });
 
@@ -79,7 +92,7 @@ export function ScrollScenes() {
             xPercent: 0,
             opacity: 1,
             ease: "none",
-            scrollTrigger: { trigger: el, start: "top bottom", end: "top 80%", scrub: 0.4 },
+            scrollTrigger: { trigger: el, start: "top bottom", end: "top 80%", scrub: S(0.4) },
           }
         );
       });
@@ -92,14 +105,14 @@ export function ScrollScenes() {
           {
             xPercent: i ? 8 : -8,
             ease: "none",
-            scrollTrigger: { trigger: ".stack-marquees", start: "top bottom", end: "bottom top", scrub: 0.5 },
+            scrollTrigger: { trigger: ".stack-marquees", start: "top bottom", end: "bottom top", scrub: S(0.5) },
           }
         );
       });
 
       // Experiencia: cada puesto se monta por partes.
       q(".job").forEach((job) => {
-        const st = { trigger: job, start: "top bottom", end: "top 75%", scrub: 0.4 };
+        const st = { trigger: job, start: "top bottom", end: "top 75%", scrub: S(0.4) };
         gsap.fromTo(job.querySelector(".job-logo"), { rotate: -90, scale: 0.4 }, { rotate: 0, scale: 1, ease: "none", scrollTrigger: st });
         gsap.fromTo(job.querySelector(".job-main"), { x: -80, opacity: 0 }, { x: 0, opacity: 1, ease: "none", scrollTrigger: st });
         gsap.fromTo(job.querySelector(".job-period"), { y: 30, opacity: 0 }, { y: 0, opacity: 1, ease: "none", scrollTrigger: st });
@@ -110,12 +123,12 @@ export function ScrollScenes() {
       gsap.fromTo(
         ".community-topo",
         { rotate: -8, scale: 1.2 },
-        { rotate: 8, scale: 1, ease: "none", scrollTrigger: { trigger: ".community", start: "top bottom", end: "bottom top", scrub: 0.5 } }
+        { rotate: 8, scale: 1, ease: "none", scrollTrigger: { trigger: ".community", start: "top bottom", end: "bottom top", scrub: S(0.5) } }
       );
       gsap.fromTo(
         ".community-title",
         { scale: 0.82, transformOrigin: "left bottom" },
-        { scale: 1, ease: "none", scrollTrigger: { trigger: ".community", start: "top bottom", end: "top 20%", scrub: 0.5 } }
+        { scale: 1, ease: "none", scrollTrigger: { trigger: ".community", start: "top bottom", end: "top 20%", scrub: S(0.5) } }
       );
 
       // Correo y nombre del pie: las letras suben en ola.
@@ -126,7 +139,7 @@ export function ScrollScenes() {
             trigger: sel,
             start: "top bottom",
             end: sel === ".footer-name" ? "bottom bottom" : "top 55%",
-            scrub: 0.6,
+            scrub: S(0.6),
           },
         });
         tl.fromTo(chars, { yPercent: 110 }, { yPercent: 0, ease: "none", stagger: 0.04 });
@@ -140,7 +153,7 @@ export function ScrollScenes() {
           gsap.fromTo(
             card,
             { y: 90, rotate: 3, opacity: 0.2 },
-            { y: 0, rotate: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "top 60%", scrub: 0.5 } }
+            { y: 0, rotate: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "top 60%", scrub: S(0.5) } }
           );
           gsap.fromTo(
             card.querySelector(".project-media img"),
@@ -214,6 +227,7 @@ export function ScrollScenes() {
     });
     document.querySelectorAll("main section, .footer").forEach((el) => ro.observe(el));
     return () => {
+      if (touch) ScrollTrigger.normalizeScroll(false);
       window.removeEventListener("load", onLoad);
       ro.disconnect();
       clearTimeout(timer);

@@ -4,6 +4,7 @@ import { Fragment, useRef } from "react";
 import {
   motion,
   useAnimationFrame,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -32,6 +33,9 @@ export function VelocityMarquee({
   className?: string;
 }) {
   const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  // Fuera de pantalla no se calcula nada (en móvil cada fotograma cuenta).
+  const inView = useInView(ref, { margin: "100px 0px" });
   const base = useMotionValue(0);
   const { scrollY } = useScroll();
   const velocity = useVelocity(scrollY);
@@ -42,7 +46,7 @@ export function VelocityMarquee({
   const items = Array.from({ length: repeat }, (_, i) => <Fragment key={i}>{children}</Fragment>);
 
   useAnimationFrame((_, delta) => {
-    if (reduce) return;
+    if (reduce || !inView) return;
     let move = dir.current * Math.abs(speed) * (delta / 1000);
     const f = factor.get();
     if (f < 0) dir.current = speed < 0 ? 1 : -1;
@@ -52,7 +56,7 @@ export function VelocityMarquee({
   });
 
   return (
-    <div className={`marquee ${className ?? ""}`}>
+    <div ref={ref} className={`marquee ${className ?? ""}`}>
       <motion.div className="marquee-track" style={{ transform }}>
         <div className="marquee-group">{items}</div>
         <div className="marquee-group" aria-hidden="true">

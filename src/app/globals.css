@@ -965,10 +965,18 @@ html.js [data-reveal][data-in] {
   color: var(--ink);
 }
 
-/* En táctil no hay ratón: el enfoque sigue al scroll y sobra la indicación. */
+/* En táctil no hay ratón: el enfoque sigue al scroll y sobra la indicación.
+   Las demás líneas se atenúan en vez de desenfocarse: el desenfoque es muy caro en móvil. */
 @media (hover: none) {
   .eyechart-readout {
     display: none;
+  }
+  .eyechart-row {
+    transition: opacity 200ms ease;
+  }
+  .eyechart[data-focusing] .eyechart-row:not([data-sharp]) {
+    filter: none;
+    opacity: 0.22;
   }
 }
 
