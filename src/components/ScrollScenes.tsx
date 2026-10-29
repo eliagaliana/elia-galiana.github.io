@@ -10,6 +10,9 @@ const q = <T extends Element = HTMLElement>(sel: string) => gsap.utils.toArray<T
 
 // Pantallas táctiles: el móvil tiene menos potencia y el scroll lo mueve el sistema.
 const isTouch = () => matchMedia("(hover: none) and (pointer: coarse)").matches;
+// iPhone y iPad (también el iPad que se anuncia como Mac).
+const isIOS = () =>
+  /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
 // Capa de movimiento ligada al scroll: cada tramo de la página mueve algo.
 // Todo es transform/opacity y se desactiva con "movimiento reducido".
@@ -21,6 +24,13 @@ export function ScrollScenes() {
     // En móvil, sin retraso de suavizado: la animación va pegada al dedo y no se pone
     // al día a saltos. En ordenador se mantiene el suavizado.
     const S = (v: number) => (touch ? true : v);
+    const ios = isIOS();
+    if (ios) {
+      // Safari en iPhone coloca en píxeles enteros lo que no va en capa propia: con
+      // el scroll lento, textos y bloques avanzan a tirones. En 3D siempre van en capa
+      // y se mueven en fracciones de píxel.
+      gsap.config({ force3D: true });
+    }
     if (touch) {
       // El scroll se gestiona en el mismo hilo que las animaciones, así van sincronizados,
       // y no se recoloca nada cuando aparece o se esconde la barra del navegador.
@@ -184,11 +194,14 @@ export function ScrollScenes() {
           scrub: true,
           invalidateOnRefresh: true,
         };
-        gsap.fromTo(
-          el,
-          { y: 0 },
-          { y: () => Math.min(el.offsetHeight, window.innerHeight) * 0.45, ease: "none", force3D: true, scrollTrigger: st }
-        );
+        // En iPhone no se desplaza la sección entera (es enorme y Safari da tirones): solo se oscurece.
+        if (!ios) {
+          gsap.fromTo(
+            el,
+            { y: 0 },
+            { y: () => Math.min(el.offsetHeight, window.innerHeight) * 0.45, ease: "none", force3D: true, scrollTrigger: st }
+          );
+        }
         gsap.fromTo(shade, { opacity: 0 }, { opacity: 0.6, ease: "none", scrollTrigger: st });
       };
       recede(".about", ".projects");
