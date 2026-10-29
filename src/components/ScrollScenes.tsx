@@ -21,10 +21,12 @@ export function ScrollScenes() {
   useGSAP(() => {
     const mm = gsap.matchMedia();
     const touch = isTouch();
-    // En móvil, sin retraso de suavizado: la animación va pegada al dedo y no se pone
-    // al día a saltos. En ordenador se mantiene el suavizado.
-    const S = (v: number) => (touch ? true : v);
     const ios = isIOS();
+    // Android: sin retraso de suavizado, la animación va pegada al dedo.
+    // iPhone: Safari avisa del scroll a golpes de píxel; un suavizado muy corto
+    // reparte cada golpe en varios fotogramas y con el dedo lento no se ve a tirones.
+    // Ordenador: se mantiene el suavizado de siempre.
+    const S = (v: number) => (ios ? 0.2 : touch ? true : v);
     if (ios) {
       // Safari en iPhone coloca en píxeles enteros lo que no va en capa propia: con
       // el scroll lento, textos y bloques avanzan a tirones. En 3D siempre van en capa
@@ -32,11 +34,13 @@ export function ScrollScenes() {
       gsap.config({ force3D: true });
     }
     if (touch) {
-      // El scroll se gestiona en el mismo hilo que las animaciones, así van sincronizados,
-      // y no se recoloca nada cuando aparece o se esconde la barra del navegador.
+      // No se recoloca nada cuando aparece o se esconde la barra del navegador.
       ScrollTrigger.config({ ignoreMobileResize: true });
-      ScrollTrigger.normalizeScroll(true);
     }
+    // Android: el scroll se gestiona en el mismo hilo que las animaciones, así van
+    // sincronizados. En iPhone no: el scroll nativo de Safari es más suave a poca velocidad.
+    const normalize = touch && !ios;
+    if (normalize) ScrollTrigger.normalizeScroll(true);
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // Barra de progreso de lectura.
@@ -168,7 +172,7 @@ export function ScrollScenes() {
           gsap.fromTo(
             card.querySelector(".project-media img"),
             { yPercent: -10, scale: 1.2 },
-            { yPercent: 10, scale: 1.2, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true } }
+            { yPercent: 10, scale: 1.2, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: ios ? 0.2 : true } }
           );
         });
       });
@@ -191,7 +195,7 @@ export function ScrollScenes() {
           trigger: next,
           start: "top bottom",
           end: () => `top ${Math.max(0, window.innerHeight - el.offsetHeight)}px`,
-          scrub: true,
+          scrub: ios ? 0.2 : true,
           invalidateOnRefresh: true,
         };
         // En iPhone no se desplaza la sección entera (es enorme y Safari da tirones): solo se oscurece.
@@ -240,7 +244,7 @@ export function ScrollScenes() {
     });
     document.querySelectorAll("main section, .footer").forEach((el) => ro.observe(el));
     return () => {
-      if (touch) ScrollTrigger.normalizeScroll(false);
+      if (normalize) ScrollTrigger.normalizeScroll(false);
       window.removeEventListener("load", onLoad);
       ro.disconnect();
       clearTimeout(timer);
